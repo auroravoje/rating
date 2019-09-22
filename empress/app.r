@@ -1,14 +1,15 @@
 #empress kombucha rating app
 library(shiny)
-library(shinyjs)
-library(shiny.semantic)
+#library(shinyjs)
+#library(shiny.semantic)
 library(shinydashboard)
 library(ShinyRatingInput)
-library(shinydashboardPlus)
-library(bs4Dash)
+#library(shinydashboardPlus)
+#library(bs4Dash)
 library(shinyEffects)
 library(shinyWidgets)
 library(tidyverse)
+
 
 #NB! - write_delim converts all to utf-8
 data <- read_delim("data/ratinglog.csv", delim=",")
@@ -21,6 +22,7 @@ ui <- dashboardPage(skin="black",
                                 title = "Empress Kombucha", height = "30px"),
                             style = "padding-top:10px; padding-bottom:10px;"),
                           class = "dropdown")
+                  
                   ), 
   dashboardSidebar(collapsed=TRUE,
     sidebarMenu(id="menu",
@@ -40,16 +42,16 @@ ui <- dashboardPage(skin="black",
 
                                 '))),
     
-    setZoom(class = "box"),
-    setZoom(class = "button"),
+    #setZoom(class = "box"),
+    #setZoom(class = "button"),
     tabItems(
       tabItem(tabName="rating",
               h2("Fortell oss hva DU synes!"),
               fluidRow(
                 ### BEETROOT ####
-                boxPlus(title = "",
+                box(title = "",
                         closable = FALSE,
-                        #status = "warning",
+                        #status = "",
                         collapsible = FALSE,
                         fluidRow(
                         column(width=6,
@@ -71,19 +73,19 @@ ui <- dashboardPage(skin="black",
                     fluidRow(
                       column(width=6,offset=3,
                       radioButtons("radio_beet_tasted", label = h3("Har du smakt Kombucha før?"),
-                                           choices = list("Ja" = 1, "Nei" = 2), 
-                                           selected = 2,inline=TRUE)
+                                           choices = list("Ja" = 1, "Nei" = 2, "Vet ikke" = 3), 
+                                           selected = 3,inline=TRUE)
                       )
                       ),
                     fluidRow(
                     column(width=6,
                     checkboxGroupInput("checkGroup_beet", label = h3("Hva synes du om smaken?"), 
-                                       choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4),
-                                       selected = 1)
+                                       choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4, "Vet ikke"=5),
+                                       selected = 5)
                     ),
                     column(width=6,
                     radioButtons("radio_beet_again", label = h3("Ville du ha drukket Kombucha igjen?"),
-                                 choices = list("Ja" = 1, "Nei" = 2), inline=TRUE)
+                                 choices = list("Ja" = 1, "Nei" = 2, "Vet ikke"=3), inline=TRUE, selected=3)
                     )
                     )
                      # htmlOutput("rating_beetroot")
@@ -91,7 +93,7 @@ ui <- dashboardPage(skin="black",
                     ),
                 #### GINGER ######
                 
-                boxPlus(title = "",
+                box(title = "",
                         closable = FALSE,
                         #status = "warning",
                         collapsible = FALSE,
@@ -115,19 +117,19 @@ ui <- dashboardPage(skin="black",
                         fluidRow(
                           column(width=6,offset=3,
                                  radioButtons("radio_ginger_tasted", label = h3("Har du smakt Kombucha før?"),
-                                              choices = list("Ja" = 1, "Nei" = 2), 
-                                              selected = 2,inline=TRUE)
+                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
+                                              selected = 3,inline=TRUE)
                           )
                         ),
                         fluidRow(
                           column(width=6,
                                  checkboxGroupInput("checkGroup_ginger", label = h3("Hva synes du om smaken?"), 
-                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4),
-                                                    selected = 1)
+                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
+                                                    selected = 5)
                           ),
                           column(width=6,
                                  radioButtons("radio_ginger_again", label = h3("Ville du ha drukket Kombucha igjen?"),
-                                              choices = list("Ja" = 1, "Nei" = 2), inline=TRUE)
+                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
                           )
                         )
                         # htmlOutput("rating_beetroot")
@@ -139,7 +141,7 @@ ui <- dashboardPage(skin="black",
                 
                 ###### STRAWBERRY #########
                 
-                boxPlus(title = "",
+                box(title = "",
                         closable = FALSE,
                         #status = "warning",
                         collapsible = FALSE,
@@ -163,19 +165,19 @@ ui <- dashboardPage(skin="black",
                         fluidRow(
                           column(width=6,offset=3,
                                  radioButtons("radio_straw_tasted", label = h3("Har du smakt Kombucha før?"),
-                                              choices = list("Ja" = 1, "Nei" = 2), 
-                                              selected = 2,inline=TRUE)
+                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
+                                              selected = 3,inline=TRUE)
                           )
                         ),
                         fluidRow(
                           column(width=6,
                                  checkboxGroupInput("checkGroup_straw", label = h3("Hva synes du om smaken?"), 
-                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4),
-                                                    selected = 1)
+                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
+                                                    selected = 5)
                           ),
                           column(width=6,
                                  radioButtons("radio_straw_again", label = h3("Ville du ha drukket Kombucha igjen?"),
-                                              choices = list("Ja" = 1, "Nei" = 2), inline=TRUE)
+                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
                           )
                         )
                         
@@ -187,7 +189,7 @@ ui <- dashboardPage(skin="black",
                 ###### ROSE ######
                 
                 
-                boxPlus(title = "",
+                box(title = "",
                         closable = FALSE,
                         #status = "warning",
                         collapsible = FALSE,
@@ -211,19 +213,19 @@ ui <- dashboardPage(skin="black",
                         fluidRow(
                           column(width=6,offset=3,
                                  radioButtons("radio_rose_tasted", label = h3("Har du smakt Kombucha før?"),
-                                              choices = list("Ja" = 1, "Nei" = 0), 
-                                              selected = 2,inline=TRUE)
+                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
+                                              selected = 3,inline=TRUE)
                           )
                         ),
                         fluidRow(
                           column(width=6,
                                  checkboxGroupInput("checkGroup_rose", label = h3("Hva synes du om smaken?"), 
-                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4),
-                                                    selected = 1)
+                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
+                                                    selected = 5)
                           ),
                           column(width=6,
                                  radioButtons("radio_rose_again", label = h3("Ville du ha drukket Kombucha igjen?"),
-                                              choices = list("Ja" = 1, "Nei" = 0), inline=TRUE)
+                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
                           )
                         )
                         # htmlOutput("rating_beetroot")
@@ -273,6 +275,7 @@ ui <- dashboardPage(skin="black",
                   actionButton(inputId="goto_rating", label = "Tilbake til rating", width='100%',
                                icon("share"),
                                style="color: #fff; background-color: #212322; border-color: #ebebe8")
+                  
                 )
               )
               )#end widgetUserBox
@@ -299,7 +302,7 @@ ui <- dashboardPage(skin="black",
                      collapsible = FALSE,
                      img(src='Empress_Beet.png', align = "center", height = 75, width = 75),
                      br(),
-                     starBlock(grade = mean(data$rating_beet,na.rm=TRUE)),
+                     #starBlock(grade = mean(data$rating_beet,na.rm=TRUE)),
                      #starBlock(grade = uiOutput("avg_beet"))
                      textOutput("avg_beet"),
                      appButton(
@@ -319,7 +322,7 @@ ui <- dashboardPage(skin="black",
                    collapsible = FALSE,
                    img(src='Empress_Ginger.png', align = "center", height = 75, width = 75),
                    br(),
-                   starBlock(grade = mean(data$rating_ginger,na.rm=TRUE)),
+                   #starBlock(grade = mean(data$rating_ginger,na.rm=TRUE)),
                    textOutput("avg_ginger"),
                    appButton(
                      url = "",
@@ -336,7 +339,7 @@ ui <- dashboardPage(skin="black",
                          collapsible = FALSE,
                          img(src='Empress_Straw.png', align = "center", height = 75, width = 75),
                          br(),
-                         starBlock(grade = mean(data$rating_straw,na.rm=TRUE)),
+                         #starBlock(grade = mean(data$rating_straw,na.rm=TRUE)),
                          textOutput("avg_straw"),
                          appButton(
                            url = "",
@@ -353,7 +356,7 @@ ui <- dashboardPage(skin="black",
                          collapsible = FALSE,
                          img(src='Empress_Rose.png', align = "center", height = 75, width = 75),
                          br(),
-                         starBlock(grade = mean(data$rating_rose,na.rm=TRUE)),
+                         #starBlock(grade = mean(data$rating_rose,na.rm=TRUE)),
                          #starBlock(grade = uiOutput("avg_beet"))
                          textOutput("avg_rose"),
                          appButton(
@@ -396,103 +399,86 @@ server <- function(input, output, session) {
   
   observeEvent(input$save_rating, {
     
-    # df_names <- c("date","latitude","longitude",
-    #               "rating_beet",  "tasted_before_beet",  "flavour_beet",  "taste_again_beet",
-    #               "rating_ginger","tasted_before_ginger","flavour_ginger","taste_again_ginger",
-    #               "rating_straw", "tasted_before_straw", "flavour_straw", "taste_again_straw",
-    #               "rating_rose",  "tasted_before_rose",  "flavour_rose",  "taste_again_rose")
+    df_names <- c("date","rating_beet","comment_beet",
+                  "rating_ginger","comment_ginger",
+                  "rating_straw","comment_straw",
+                  "rating_rose","comment_rose")  
     
-    df_names_beet <- c("date","latitude","longitude",
-                       "rating_beet",  "tasted_before_beet",  "flavour_beet",  "taste_again_beet")
+    dfLog <- setNames(data.frame(matrix(ncol = 9, nrow = 0)), df_names)
     
-    
-    #print(df_names)
-    dfLog_beet <- setNames(data.frame(matrix(ncol = 7, nrow = 1)), df_names_beet)
-    #str(dfLog)
     #populate dataframe with inputs:
     
-    dfLog_beet = data.frame(
+    dfLog = data.frame(
+      date = Sys.Date(),
+      rating_beet = input$rating_beet,
+      comment_beet = input$radio_beet_tasted,
+      rating_ginger = input$rating_ginger,
+      comment_ginger = input$radio_ginger_tasted,
+      rating_straw = input$rating_straw,
+      comment_straw = input$radio_straw_tasted,
+      rating_rose = input$rating_rose,
+      comment_rose = input$radio_rose_tasted
+    )
+    #print(dfInput)
     
-    date = Sys.Date(),
-    latitude = 59.911491,
-    longitude = 10.757933,
+    #data <- rbind(data,dfLog)
+    fileData <- reactiveFileReader(50,NULL,filePath="data/ratinglog.csv", readFunc=read.csv)
+    dfLog <- as.data.frame(dfLog)
+    dfLog <- rbind(fileData(),dfLog)
     
-    rating_beet = input$rating_beet,
-    tasted_before_beet = input$radio_beet_tasted,
-    flavour_beet = input$checkGroup_beet,
-    taste_again_beet = input$radio_beet_again)
+    #print(data)
+    write_delim(dfLog,"data/ratinglog.csv",delim=",")
+    print("printed to file")
     
-    # rating_ginger = input$rating_ginger,
-    # tasted_before_ginger = input$radio_ginger_tasted,
-    # flavour_ginger = input$checkGroup_ginger,
-    # taste_again_ginger= input$radio_ginger_again,
-    # 
-    # rating_straw = input$rating_straw,
-    # tasted_before_straw = input$radio_straw_tasted,
-    # flavour_straw = input$checkGroup_straw,
-    # taste_again_straw = input$radio_straw_again,
-    # 
-    # rating_rose = input$rating_rose,
-    # tasted_before_rose = input$radio_rose_tasted,
-    # flavour_rose = input$checkGroup_rose,
-    # taste_again_rose= input$radio_rose_again
-    #)
-                       
-    # print(ncol(data))
-    # print(ncol(dfLog))
-    # print(dfLog)
-      
-    dfLog_beet <- rbind(data,dfLog_beet)
-  
-    #dfLog <- as.data.frame(dfLog)
-    write_delim(dfLog_beet,"data/dfLog_beet.csv",delim=",")
+    #session$reload()
     
   })
-
-  fileData <- reactiveFileReader(100,NULL,filePath="data/ratinglog_beet.csv", readFunc=read.csv)
+  
+  
+  fileData <- reactiveFileReader(50,NULL,filePath="data/ratinglog.csv", readFunc=read.csv)
   
   output$filedataTable <- renderTable({
     fileData()
   })
 
 #### dynamic outputs per product #######    
-  # output$nr_beet <- renderText({ 
-  #   NROW(na.omit(fileData()$rating_beet))
-  # })
-  # output$avg_beet <- renderText({
-  #   round(mean(fileData()$rating_beet,na.rm=TRUE),1)
-  # })
-  # 
-  # 
-  # output$nr_ginger <- renderText({ 
-  #   NROW(na.omit(fileData()$rating_ginger))
-  # })
-  # output$avg_ginger <- renderText({
-  #   round(mean(fileData()$rating_ginger,na.rm=TRUE),1)
-  # })
-  # 
-  # output$nr_straw <- renderText({ 
-  #   NROW(na.omit(fileData()$rating_straw))
-  # })
-  # output$avg_straw <- renderText({
-  #   round(mean(fileData()$rating_straw,na.rm=TRUE),1)
-  # })
-  # 
-  # output$nr_rose <- renderText({ 
-  #   NROW(na.omit(fileData()$rating_rose))
-  # })
-  # output$avg_rose <- renderText({
-  #   round(mean(fileData()$rating_rose,na.rm=TRUE),1)
-  # })
-  # 
+  output$nr_beet <- renderText({
+    NROW(na.omit(fileData()$rating_beet))
+  })
+  output$avg_beet <- renderText({
+    round(mean(fileData()$rating_beet,na.rm=TRUE),1)
+  })
+
+
+  output$nr_ginger <- renderText({
+    NROW(na.omit(fileData()$rating_ginger))
+  })
+  output$avg_ginger <- renderText({
+    round(mean(fileData()$rating_ginger,na.rm=TRUE),1)
+  })
+
+  output$nr_straw <- renderText({
+    NROW(na.omit(fileData()$rating_straw))
+  })
+  output$avg_straw <- renderText({
+    round(mean(fileData()$rating_straw,na.rm=TRUE),1)
+  })
+
+  output$nr_rose <- renderText({
+    NROW(na.omit(fileData()$rating_rose))
+  })
+  output$avg_rose <- renderText({
+    round(mean(fileData()$rating_rose,na.rm=TRUE),1)
+  })
+
   
   
   
   
-  # ##### test rating #####
-  #   output$rating_beet <- renderText({
-  #     paste("Rated: ",input$rating_beet)
-  #   }) 
+###### test rating #####
+    output$rating_beet <- renderText({
+      paste("Rated: ",input$rating_beet)
+    })
   
   
 ######### thank you tab/confirmation ######   
@@ -504,7 +490,7 @@ server <- function(input, output, session) {
     updateTabItems(session, 'menu', 'rating')
   }) 
   
-  
+    
   
 }#end server
 
