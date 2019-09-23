@@ -41,9 +41,29 @@ ui <- dashboardPage(skin="black",
                                 }
 
                                 '))),
+    #style size of checkboxes (put into sep css later):
+    # tags$style("
+    #   .checkbox { /* checkbox is a div class*/
+    #     line-height: 30px;
+    #     margin-bottom: 40px; /*set the margin, so boxes don't overlap*/
+    #   }
+    #   input[type='checkbox']{ /* style for checkboxes */
+    #     width: 15px; /*Desired width*/
+    #     height: 15px; /*Desired height*/
+    #     line-height: 30px; 
+    #   }
+    #   span { 
+    #       margin-left: 15px;  /*set the margin, so boxes don't overlap labels*/
+    #       line-height: 30px; 
+    #   }
+    #   "),
     
-    #setZoom(class = "box"),
-    #setZoom(class = "button"),
+    
+    
+    
+    setZoom(class = "box"),
+    setZoom(class = "button"),
+    
     tabItems(
       tabItem(tabName="rating",
               h2("Fortell oss hva DU synes!"),
@@ -56,7 +76,7 @@ ui <- dashboardPage(skin="black",
                         fluidRow(
                         column(width=6,
                                
-                               img(src='Empress_Beet.png', align = "left", height = 180, width = 180)
+                               img(src='Empress_Beet_Sept2019.png', align = "left", height = 180, width = 180)
                                
                                #br(),
                         ),
@@ -72,20 +92,50 @@ ui <- dashboardPage(skin="black",
 
                     fluidRow(
                       column(width=6,offset=3,
-                      radioButtons("radio_beet_tasted", label = h3("Har du smakt Kombucha før?"),
-                                           choices = list("Ja" = 1, "Nei" = 2, "Vet ikke" = 3), 
-                                           selected = 3,inline=TRUE)
+                      # radioButtons("radio_beet_tasted", label = h3("Har du smakt Kombucha før?"), 
+                      #                      choices = list("Ja" = 1, "Nei" = 2, "Vet ikke" = 3),
+                      #                      selected = 3,inline=TRUE)
+
+                      awesomeRadio(inputId = "radio_beet_tasted",
+                        label = "Har du smakt Kombucha før?",
+                        choices = c("Ja", "Nei", "Vet ikke"),
+                        selected = "Vet ikke",
+                        status = "warning",
+                        inline=TRUE)
+                      
                       )
                       ),
+                      
                     fluidRow(
                     column(width=6,
-                    checkboxGroupInput("checkGroup_beet", label = h3("Hva synes du om smaken?"), 
-                                       choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4, "Vet ikke"=5),
-                                       selected = 5)
+                    # checkboxGroupInput("checkGroup_beet", label = h3("Hva synes du om smaken?"), 
+                    #                    choices = list("Frisk" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4, "Vet ikke"=5),
+                    #                    selected = 5, inline = TRUE)
+                    
+                    awesomeCheckboxGroup(
+                      inputId = "checkGroup_beet",
+                      label = "Hva synes du om smaken?", 
+                      choices = c("Frisk", "Søt", "Sur", "Merkelig", "Vet ikke"),
+                      inline = TRUE,
+                      status = "warning",
+                      selected = "Vet ikke"
+                    )
+                    
+                    
+                    
                     ),
                     column(width=6,
-                    radioButtons("radio_beet_again", label = h3("Ville du ha drukket Kombucha igjen?"),
-                                 choices = list("Ja" = 1, "Nei" = 2, "Vet ikke"=3), inline=TRUE, selected=3)
+                    # radioButtons("radio_beet_again", label = h3("Ville du ha drukket Kombucha igjen?"),
+                    #              choices = list("Ja" = 1, "Nei" = 2, "Vet ikke"=3), inline=TRUE, selected=3)
+                    
+                    awesomeRadio(inputId = "radio_beet_again",
+                                 label = "Ville du ha drukket Kombucha igjen?",
+                                 choices = c("Ja", "Nei", "Vet ikke"),
+                                 selected = "Vet ikke",
+                                 status = "warning",
+                                 inline=TRUE)
+                    
+                    
                     )
                     )
                      # htmlOutput("rating_beetroot")
@@ -100,7 +150,7 @@ ui <- dashboardPage(skin="black",
                         fluidRow(
                           column(width=6,
                                  
-                                 img(src='Empress_Ginger.png', align = "left", height = 180, width = 180)
+                                 img(src='Empress_Ginger_Sept2019.png', align = "left", height = 180, width = 180)
                                  
                                  #br(),
                           ),
@@ -116,23 +166,52 @@ ui <- dashboardPage(skin="black",
                         
                         fluidRow(
                           column(width=6,offset=3,
-                                 radioButtons("radio_ginger_tasted", label = h3("Har du smakt Kombucha før?"),
-                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
-                                              selected = 3,inline=TRUE)
+                                 
+                                 # radioButtons("radio_ginger_tasted", label = h3("Har du smakt Kombucha før?"),
+                                 #              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
+                                 #              selected = 3,inline=TRUE)
+                                 
+                                 awesomeRadio(inputId = "radio_ginger_tasted",
+                                              label = "Har du smakt Kombucha før?",
+                                              choices = c("Ja", "Nei", "Vet ikke"),
+                                              selected = "Vet ikke",
+                                              status = "warning",
+                                              inline=TRUE)
+                                 
                           )
                         ),
                         fluidRow(
                           column(width=6,
-                                 checkboxGroupInput("checkGroup_ginger", label = h3("Hva synes du om smaken?"), 
-                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
-                                                    selected = 5)
+                                 
+                                 # checkboxGroupInput("checkGroup_ginger", label = h3("Hva synes du om smaken?"), 
+                                 #                    choices = list("Frisk" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
+                                 #                    selected = 5, inline=TRUE)
+                                 awesomeCheckboxGroup(
+                                   inputId = "checkGroup_ginger",
+                                   label = "Hva synes du om smaken?", 
+                                   choices = c("Frisk", "Søt", "Sur", "Merkelig", "Vet ikke"),
+                                   inline = TRUE,
+                                   status = "warning",
+                                   selected = "Vet ikke"
+                                 )
+                                 
+                                 
                           ),
                           column(width=6,
-                                 radioButtons("radio_ginger_again", label = h3("Ville du ha drukket Kombucha igjen?"),
-                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
+                                 
+                                 # radioButtons("radio_ginger_again", label = h3("Ville du ha drukket Kombucha igjen?"),
+                                 #              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
+                                 
+                                 awesomeRadio(inputId = "radio_ginger_again",
+                                              label = "Ville du ha drukket Kombucha igjen?",
+                                              choices = c("Ja", "Nei", "Vet ikke"),
+                                              selected = "Vet ikke",
+                                              status = "warning",
+                                              inline=TRUE)
+                                 
                           )
                         )
-                        # htmlOutput("rating_beetroot")
+                       
                         
                 )#end box
                 
@@ -148,7 +227,7 @@ ui <- dashboardPage(skin="black",
                         fluidRow(
                           column(width=6,
                                  
-                                 img(src='Empress_Straw.png', align = "left", height = 180, width = 180)
+                                 img(src='Empress_Strawberry_Sept2019.png', align = "left", height = 180, width = 180)
                                  
                                  #br(),
                           ),
@@ -164,20 +243,49 @@ ui <- dashboardPage(skin="black",
                         
                         fluidRow(
                           column(width=6,offset=3,
-                                 radioButtons("radio_straw_tasted", label = h3("Har du smakt Kombucha før?"),
-                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
-                                              selected = 3,inline=TRUE)
+                                 
+                                 # radioButtons("radio_straw_tasted", label = h3("Har du smakt Kombucha før?"),
+                                 #              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
+                                 #              selected = 3,inline=TRUE)
+                                 
+                                 awesomeRadio(inputId = "radio_straw_tasted",
+                                              label = "Har du smakt Kombucha før?",
+                                              choices = c("Ja", "Nei", "Vet ikke"),
+                                              selected = "Vet ikke",
+                                              status = "warning",
+                                              inline=TRUE)
+                                 
                           )
                         ),
                         fluidRow(
                           column(width=6,
-                                 checkboxGroupInput("checkGroup_straw", label = h3("Hva synes du om smaken?"), 
-                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
-                                                    selected = 5)
+                                 
+                                 # checkboxGroupInput("checkGroup_straw", label = h3("Hva synes du om smaken?"), 
+                                 #                    choices = list("Frisk" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
+                                 #                    selected = 5, inline=TRUE)
+                                 
+                                 awesomeCheckboxGroup(
+                                   inputId = "checkGroup_straw",
+                                   label = "Hva synes du om smaken?", 
+                                   choices = c("Frisk", "Søt", "Sur", "Merkelig", "Vet ikke"),
+                                   inline = TRUE,
+                                   status = "warning",
+                                   selected = "Vet ikke"
+                                 )
+                                 
                           ),
                           column(width=6,
-                                 radioButtons("radio_straw_again", label = h3("Ville du ha drukket Kombucha igjen?"),
-                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
+                                 
+                                 # radioButtons("radio_straw_again", label = h3("Ville du ha drukket Kombucha igjen?"),
+                                 #              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
+                                 awesomeRadio(inputId = "radio_straw_again",
+                                              label = "Ville du ha drukket Kombucha igjen?",
+                                              choices = c("Ja", "Nei", "Vet ikke"),
+                                              selected = "Vet ikke",
+                                              status = "warning",
+                                              inline=TRUE)
+                                 
+                                 
                           )
                         )
                         
@@ -196,7 +304,7 @@ ui <- dashboardPage(skin="black",
                         fluidRow(
                           column(width=6,
                                  
-                                 img(src='Empress_Rose.png', align = "left", height = 180, width = 180)
+                                 img(src='Empress_Rose_Sept2019.png', align = "left", height = 180, width = 180)
                                  
                                  #br(),
                           ),
@@ -212,31 +320,65 @@ ui <- dashboardPage(skin="black",
                         
                         fluidRow(
                           column(width=6,offset=3,
-                                 radioButtons("radio_rose_tasted", label = h3("Har du smakt Kombucha før?"),
-                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
-                                              selected = 3,inline=TRUE)
+                                 
+                                 # radioButtons("radio_rose_tasted", label = h3("Har du smakt Kombucha før?"),
+                                 #              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), 
+                                 #              selected = 3,inline=TRUE)
+                                 
+                                 awesomeRadio(inputId = "radio_rose_tasted",
+                                              label = "Har du smakt Kombucha før?",
+                                              choices = c("Ja", "Nei", "Vet ikke"),
+                                              selected = "Vet ikke",
+                                              status = "warning",
+                                              inline=TRUE)
                           )
                         ),
                         fluidRow(
                           column(width=6,
-                                 checkboxGroupInput("checkGroup_rose", label = h3("Hva synes du om smaken?"), 
-                                                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
-                                                    selected = 5)
+                                 
+                                 # checkboxGroupInput("checkGroup_rose", label = h3("Hva synes du om smaken?"), 
+                                 #                    choices = list("Forfriskende" = 1, "Søt" = 2, "Sur" = 3, "Merkelig" = 4,"Vet ikke" = 5),
+                                 #                    selected = 5, inline=TRUE)
+                                 awesomeCheckboxGroup(
+                                   inputId = "checkGroup_rose",
+                                   label = "Hva synes du om smaken?", 
+                                   choices = c("Frisk", "Søt", "Sur", "Merkelig", "Vet ikke"),
+                                   inline = TRUE,
+                                   status = "warning",
+                                   selected = "Vet ikke"
+                                 )
                           ),
                           column(width=6,
-                                 radioButtons("radio_rose_again", label = h3("Ville du ha drukket Kombucha igjen?"),
-                                              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
+                                 # 
+                                 # radioButtons("radio_rose_again", label = h3("Ville du ha drukket Kombucha igjen?"),
+                                 #              choices = list("Ja" = 1, "Nei" = 2,"Vet ikke" = 3), inline=TRUE,selected = 3)
+                                 awesomeRadio(inputId = "radio_rose_again",
+                                              label = "Ville du ha drukket Kombucha igjen?",
+                                              choices = c("Ja", "Nei", "Vet ikke"),
+                                              selected = "Vet ikke",
+                                              status = "warning",
+                                              inline=TRUE)
                           )
                         )
-                        # htmlOutput("rating_beetroot")
+                        # htmlOutput("rating_rose")
                         
                 )
                 
               ),
               fluidRow(
-                actionButton(inputId="save_rating", label = "SEND", width='100%',
-                icon("telegram-plane"),#icon("share"),
-                style="color: #fff; background-color: #212322; border-color: #ebebe8")
+                
+                # actionButton(inputId="save_rating", label = "SEND", width='80%',
+                # icon("telegram-plane"),#icon("share"),
+                # style="color: #fff; background-color: #212322; border-color: #ebebe8")
+                column(width=6, align="center", offset=3,
+                actionBttn(
+                  inputId = "save_rating",
+                  label = "Send", 
+                  style = "gradient",
+                  color = "primary",
+                  icon = icon("telegram-plane")
+                )
+                )
                 
               )
               ),
@@ -269,12 +411,14 @@ ui <- dashboardPage(skin="black",
                   socialButton(
                     url = "https://www.pictosee.com/drinkempress/",
                     type = "instagram"
-                  ),
-                  br(),
-                  br(),
-                  actionButton(inputId="goto_rating", label = "Tilbake til rating", width='100%',
-                               icon("share"),
-                               style="color: #fff; background-color: #212322; border-color: #ebebe8")
+                  )#,
+                  #Sys.sleep(time=10)
+                  #,
+                  # br(),
+                  # br(),
+                  # actionButton(inputId="goto_rating", label = "Tilbake til rating", width='100%',
+                  #              icon("share"),
+                  #              style="color: #fff; background-color: #212322; border-color: #ebebe8")
                   
                 )
               )
@@ -293,7 +437,7 @@ ui <- dashboardPage(skin="black",
                header_img = "empress_bottle_bkg.jpg",
                front_title = "Resultater",
                back_title = "Tittel bakside",
-               "evt tekst her",
+               "",
                
                fluidRow(
                  boxPlus(
@@ -302,7 +446,7 @@ ui <- dashboardPage(skin="black",
                      collapsible = FALSE,
                      img(src='Empress_Beet.png', align = "center", height = 75, width = 75),
                      br(),
-                     #starBlock(grade = mean(data$rating_beet,na.rm=TRUE)),
+                     starBlock(grade = mean(data$rating_beet,na.rm=TRUE)),
                      #starBlock(grade = uiOutput("avg_beet"))
                      textOutput("avg_beet"),
                      appButton(
@@ -322,7 +466,7 @@ ui <- dashboardPage(skin="black",
                    collapsible = FALSE,
                    img(src='Empress_Ginger.png', align = "center", height = 75, width = 75),
                    br(),
-                   #starBlock(grade = mean(data$rating_ginger,na.rm=TRUE)),
+                   starBlock(grade = mean(data$rating_ginger,na.rm=TRUE)),
                    textOutput("avg_ginger"),
                    appButton(
                      url = "",
@@ -339,7 +483,7 @@ ui <- dashboardPage(skin="black",
                          collapsible = FALSE,
                          img(src='Empress_Straw.png', align = "center", height = 75, width = 75),
                          br(),
-                         #starBlock(grade = mean(data$rating_straw,na.rm=TRUE)),
+                         starBlock(grade = mean(data$rating_straw,na.rm=TRUE)),
                          textOutput("avg_straw"),
                          appButton(
                            url = "",
@@ -356,7 +500,7 @@ ui <- dashboardPage(skin="black",
                          collapsible = FALSE,
                          img(src='Empress_Rose.png', align = "center", height = 75, width = 75),
                          br(),
-                         #starBlock(grade = mean(data$rating_rose,na.rm=TRUE)),
+                         starBlock(grade = mean(data$rating_rose,na.rm=TRUE)),
                          #starBlock(grade = uiOutput("avg_beet"))
                          textOutput("avg_rose"),
                          appButton(
@@ -409,7 +553,7 @@ server <- function(input, output, session) {
     #populate dataframe with inputs:
     
     dfLog = data.frame(
-      date = Sys.Date(),
+      date = as.character(Sys.Date()),
       rating_beet = input$rating_beet,
       comment_beet = input$radio_beet_tasted,
       rating_ginger = input$rating_ginger,
@@ -424,13 +568,13 @@ server <- function(input, output, session) {
     #data <- rbind(data,dfLog)
     fileData <- reactiveFileReader(50,NULL,filePath="data/ratinglog.csv", readFunc=read.csv)
     dfLog <- as.data.frame(dfLog)
-    dfLog <- rbind(fileData(),dfLog)
+    dfLog <- rbind(as.data.frame(fileData()),dfLog)
     
     #print(data)
     write_delim(dfLog,"data/ratinglog.csv",delim=",")
-    print("printed to file")
+    #print("printed to file")
     
-    #session$reload()
+    session$reload()
     
   })
   
